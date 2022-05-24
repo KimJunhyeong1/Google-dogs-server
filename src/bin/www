@@ -8,6 +8,7 @@ var app = require("../app");
 var debug = require("debug")("generator:server");
 var http = require("http");
 const Logger = require("../loaders/logger");
+const { socketIo } = require("../services/socket");
 
 /**
  * Get port from environment and store in Express.
@@ -21,7 +22,7 @@ app.set("port", port);
  */
 
 var server = http.createServer(app);
-
+socketIo(server);
 /**
  * Listen on provided port, on all network interfaces.
  */

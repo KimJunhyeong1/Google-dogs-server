@@ -8,7 +8,6 @@ const joiDocSchema = joi.object({
     .string()
     .meta({ _mongoose: { type: "ObjectId", ref: "User" } })
     .required(),
-  createAt: joi.date().required(),
   content: joi.string().required(),
 });
 
