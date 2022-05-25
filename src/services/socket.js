@@ -1,6 +1,4 @@
-const passport = require("passport");
 const SocketIO = require("socket.io");
-const { isLoggedIn } = require("../api/middlewares/authorization");
 const Doc = require("../models/Doc");
 
 exports.socketIo = (server) => {
@@ -12,8 +10,6 @@ exports.socketIo = (server) => {
   });
 
   io.on("connection", (socket) => {
-    console.log("client connect: ", socket.id);
-
     socket.on("get-doc", async (docId) => {
       const doc = await Doc.findOne({ _id: docId }).lean();
 

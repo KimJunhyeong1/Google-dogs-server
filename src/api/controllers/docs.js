@@ -2,41 +2,29 @@ const { default: mongoose } = require("mongoose");
 const Doc = require("../../models/Doc");
 const { catchAsync } = require("../../utils/asyncHandler");
 
-exports.getAllMyDocs = async (req, res, next) => {
-  try {
-    const docs = await Doc.find({
-      creator: mongoose.Types.ObjectId(req.user.id),
-    }).lean();
+exports.getAllMyDocs = catchAsync(async (req, res, next) => {
+  const docs = await Doc.find({
+    creator: mongoose.Types.ObjectId(req.user.id),
+  }).lean();
 
-    res.json(docs);
-  } catch (error) {
-    next(error);
-  }
-};
+  res.json(docs);
+});
 
-exports.getDoc = async (req, res, next) => {
+exports.getDoc = catchAsync(async (req, res, next) => {
   const { docId } = req.params;
 
-  try {
-    const doc = await Doc.findById(docId).lean();
+  const doc = await Doc.findById(docId).lean();
 
-    res.status(200).json(doc);
-  } catch (error) {
-    next(error);
-  }
-};
+  res.status(200).json(doc);
+});
 
-exports.createDoc = async (req, res, next) => {
+exports.createDoc = catchAsync(async (req, res, next) => {
   const doc = req.body;
 
-  try {
-    const newDoc = await Doc.create({
-      ...doc,
-      creator: req.user.id,
-    });
+  const newDoc = await Doc.create({
+    ...doc,
+    creator: req.user.id,
+  });
 
-    res.status(201).json(newDoc);
-  } catch (error) {
-    next(error);
-  }
-};
+  res.status(201).json(newDoc);
+});

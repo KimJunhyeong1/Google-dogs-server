@@ -9,7 +9,7 @@ module.exports = (app) => {
   passport.use(
     new JWTStrategy(
       {
-        secretOrKey: config.jwtSecret,
+        secretOrKey: config.JWT_SECRET,
         jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
         passReqToCallback: true,
       },

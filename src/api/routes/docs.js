@@ -11,6 +11,4 @@ module.exports = (app) => {
   route.get("/:docId", isLoggedIn, DocController.getDoc);
 
   route.post("/", isLoggedIn, DocController.createDoc);
-
-  // route.patch("/:docId", isLoggedIn, async (req, res, next) => {});
 };
